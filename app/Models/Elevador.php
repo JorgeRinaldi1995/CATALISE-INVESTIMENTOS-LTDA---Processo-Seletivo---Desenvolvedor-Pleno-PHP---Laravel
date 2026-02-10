@@ -117,13 +117,13 @@ class Elevador
         return [
             'andar_atual' => $this->andarAtual,
             'capacidade' => $this->capacidade,
-            'fila' => iterator_to_array(clone $this->filaChamados),
+            'fila' => iterator_to_array($this->getChamadosPendentes()),
         ];
     }
 
     public function filaComoArray(): array
     {
-        return iterator_to_array(clone $this->filaChamados);
+        return iterator_to_array($this->getChamadosPendentes());
     }
 
 }
