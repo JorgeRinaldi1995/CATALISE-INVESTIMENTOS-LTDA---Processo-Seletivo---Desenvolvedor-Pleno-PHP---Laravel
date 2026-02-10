@@ -11,20 +11,19 @@ O projeto foi pensado para rodar via **CLI (Artisan Command)**, sem dependência
 
 ## Estrutura do projeto (simplificada)
 
----
+```
 app/
 ├── Console/
 │ └── Commands/
-│       └── TestarElevador.php
+│     └── TestarElevador.php
 │
 ├── Domain/
 │ └── Elevador/
-│       └── Elevador.php
-│ 
+│     └── Elevador.php
 Dockerfile
 docker-compose.yml
 
----
+```
 
 ## ⚙️ O que o sistema faz
 
