@@ -105,13 +105,30 @@ php artisan app:testar-elevador
 ### Exemplo de saída no console
 
 ```
-Elevador instalado (capacidade 8)
-Chamado registrado para o andar 3
-Chamado registrado para o andar 1
-subindo do 0 para 3
-Elevador chegou no andar 3
-Chamados restantes: 3
-...
+Elevador instalado no térreo com capacidade para 8 pessoas.
+Andar atual: 0
+Capacidade: 8
+Fila: []
+Chamado registrado para o andar 3. Posição na fila: 1
+Chamado registrado para o andar 1. Posição na fila: 2
+Chamado registrado para o andar 5. Posição na fila: 3
+Chamado registrado para o andar 2. Posição na fila: 4
+
+ Chamados adicionados
+Andar atual: 0
+Capacidade: 8
+Fila: [3, 1, 5, 2]
+Próximo chamado: 3
+Fila atual: [3, 1, 5, 2]
+Elevador saindo do andar 0...
+Direção: subindo...
+Elevador chegou no andar 3.
+Chamados restantes na fila: 3
+Estado após mover:
+Andar atual: 3
+Capacidade: 8
+Fila: [1, 5, 2]
+----------------------------------------
 ```
 
 Projeto desenvolvido para processo seletivo da Catálise Investimentos.
