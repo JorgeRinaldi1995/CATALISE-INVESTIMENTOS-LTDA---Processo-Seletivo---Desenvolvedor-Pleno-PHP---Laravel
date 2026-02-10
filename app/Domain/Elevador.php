@@ -42,7 +42,7 @@ class Elevador
         $this->andarAtual = 0;
         $this->capacidade = $capacidade;
 
-        echo "✅ Elevador instalado no térreo com capacidade para {$capacidade} pessoas.\n";
+        echo "Elevador instalado no térreo com capacidade para {$capacidade} pessoas.\n";
     }
 
     /**
@@ -53,11 +53,11 @@ class Elevador
      */
     public function chamar(int $andar): void {
         if ($andar < 0){
-            throw new InvalidArgumentException("❌ Andar inválido. Deve ser maior ou igual a 0.");
+            throw new InvalidArgumentException("Andar inválido. Deve ser maior ou igual a 0.");
         }
 
         $this->filaChamados->enqueue($andar);
-        echo  "📞 Chamado registrado para o andar {$andar}. Posição na fila: {$this->filaChamados->count()}\n";
+        echo  "Chamado registrado para o andar {$andar}. Posição na fila: {$this->filaChamados->count()}\n";
     }
 
     /**
@@ -69,22 +69,22 @@ class Elevador
         $andarAtual = $this->getAndarAtual();
 
         if ($this->filaChamados->isEmpty()) {
-            echo  "⚠️ Não há chamados pendentes. Elevador parado no andar {$andarAtual}.";
+            echo  "Não há chamados pendentes. Elevador parado no andar {$andarAtual}.";
             return;
         }
 
         $proximoAndar = $this->filaChamados->dequeue();
 
-        echo "🚀 Elevador saindo do andar {$andarAtual}...\n";
+        echo "Elevador saindo do andar {$andarAtual}...\n";
         
         $direcao = $proximoAndar > $andarAtual ? "subindo" : "descendo";
 
-        echo "📊 Direção: {$direcao}...\n";
+        echo "Direção: {$direcao}...\n";
 
         $this->andarAtual = $proximoAndar;
 
-        echo "✅ Elevador chegou no andar {$this->andarAtual}.\n"; 
-        echo "📋 Chamados restantes na fila: {$this->filaChamados->count()}\n";
+        echo "Elevador chegou no andar {$this->andarAtual}.\n"; 
+        echo "Chamados restantes na fila: {$this->filaChamados->count()}\n";
     }
 
     /**

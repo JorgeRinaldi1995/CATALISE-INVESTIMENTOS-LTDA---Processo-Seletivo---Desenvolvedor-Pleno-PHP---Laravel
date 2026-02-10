@@ -38,7 +38,7 @@ class TestarElevador extends Command
         $elevador->chamar(5);
         $elevador->chamar(2);
 
-        $this->info("\n📋 Chamados adicionados");
+        $this->info("\n Chamados adicionados");
         $this->mostrarStatus($elevador);
         sleep(2);
 
@@ -52,20 +52,20 @@ class TestarElevador extends Command
 
             $proximo = $status['fila'][0];
 
-            $this->info("➡️ Próximo chamado: {$proximo}");
+            $this->info("Próximo chamado: {$proximo}");
             $this->info("Fila atual: [" . implode(', ', $status['fila']) . "]");
 
             $elevador->mover();
             sleep(1);
 
-            $this->info("📊 Estado após mover:");
+            $this->info("Estado após mover:");
             $this->mostrarStatus($elevador);
 
             $this->info(str_repeat('-', 40));
             sleep(2);
         }
 
-        $this->info("✅ Todos os chamados foram processados");
+        $this->info("Todos os chamados foram processados");
     }
 
     /**
@@ -75,8 +75,8 @@ class TestarElevador extends Command
     {
         $status = $elevador->status();
 
-        $this->info("🛗 Andar atual: {$status['andar_atual']}");
-        $this->info("👥 Capacidade: {$status['capacidade']}");
-        $this->info("📋 Fila: [" . implode(', ', $status['fila']) . "]");
+        $this->info("Andar atual: {$status['andar_atual']}");
+        $this->info("Capacidade: {$status['capacidade']}");
+        $this->info("Fila: [" . implode(', ', $status['fila']) . "]");
     }
 }
