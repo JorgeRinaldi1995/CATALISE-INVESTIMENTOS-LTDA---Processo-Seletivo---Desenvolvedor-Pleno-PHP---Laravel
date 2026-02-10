@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Domain;
 
 use InvalidArgumentException;
 use SplQueue;
@@ -13,8 +13,6 @@ use SplQueue;
  * 2. Adicione chamadas: $elevador->chamar(3);
  * 3. Processe chamadas: $elevador->mover();
  * 4. Verifique estado: $elevador->getAndarAtual();
- * 
- * @package ElevatorSystem
  */
 
 class Elevador
@@ -115,15 +113,9 @@ class Elevador
     public function status(): array
     {
         return [
-            'andar_atual' => $this->andarAtual,
+            'andar_atual' => $this->getAndarAtual(),
             'capacidade' => $this->capacidade,
             'fila' => iterator_to_array($this->getChamadosPendentes()),
         ];
     }
-
-    public function filaComoArray(): array
-    {
-        return iterator_to_array($this->getChamadosPendentes());
-    }
-
 }

@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Elevador;
+use App\Domain\Elevador;
 use Illuminate\Console\Command;
 
 class TestarElevador extends Command
@@ -28,34 +28,55 @@ class TestarElevador extends Command
     {
         $elevador = new Elevador(8);
 
-        $this->info("🚀 Elevador iniciado no térreo\n");
+        // Estado inicial
+        $this->mostrarStatus($elevador);
         sleep(1);
 
+        // Chamadas
         $elevador->chamar(3);
         $elevador->chamar(1);
         $elevador->chamar(5);
         $elevador->chamar(2);
 
-        $this->info("📋 Fila: [" . implode(', ', $elevador->filaComoArray()) . "]\n");
+        $this->info("\n📋 Chamados adicionados");
+        $this->mostrarStatus($elevador);
         sleep(2);
 
-        while (!empty($elevador->filaComoArray())) {
+        // Processamento da fila
+        while (true) {
+            $status = $elevador->status();
 
-            $filaAntes = $elevador->filaComoArray();
-            $proximo = $filaAntes[0];
+            if (empty($status['fila'])) {
+                break;
+            }
+
+            $proximo = $status['fila'][0];
 
             $this->info("➡️ Próximo chamado: {$proximo}");
-            $this->info("📋 Fila: [" . implode(', ', $filaAntes) . "]");
+            $this->info("Fila atual: [" . implode(', ', $status['fila']) . "]");
 
             $elevador->mover();
             sleep(1);
 
-            $filaAgora = $elevador->filaComoArray();
-            $this->info("📋 Fila agora: [" . implode(', ', $filaAgora) . "]");
+            $this->info("📊 Estado após mover:");
+            $this->mostrarStatus($elevador);
+
             $this->info(str_repeat('-', 40));
             sleep(2);
         }
 
         $this->info("✅ Todos os chamados foram processados");
+    }
+
+    /**
+     * Exibe o status do elevador de forma padronizada
+     */
+    private function mostrarStatus(Elevador $elevador): void
+    {
+        $status = $elevador->status();
+
+        $this->info("🛗 Andar atual: {$status['andar_atual']}");
+        $this->info("👥 Capacidade: {$status['capacidade']}");
+        $this->info("📋 Fila: [" . implode(', ', $status['fila']) . "]");
     }
 }
